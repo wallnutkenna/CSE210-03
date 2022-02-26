@@ -41,7 +41,7 @@ class Parachute:
 
     def  is_guy_dead(self):
         """A method to define if the parachute guy is dead."""
-        
+        is_guy_dead = False
         if len(self._parachute) == 0:
             is_guy_dead = True
 
