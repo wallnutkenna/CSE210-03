@@ -1,51 +1,41 @@
 import random
+from ParachuteGuy import Parachute
 
+def main():
+    again = "y"
+    while (again.lower() == "y"):
+        game = play_game()
+        if not game.check_win():
+            again = input("Game over! Play again? (y/n): ")
+        else:
+            again = input("Congrats! You guessed the word! Play again? (y/n): ")
+    print("Bye!")
 
-class Parachute:
-    """This class will display the Jumper guy with a parachute.
-    Every time the player guesses a letter from the secret word wrong,
-    a line from the parachute will be erased."""
+class play_game:
 
     def __init__(self):
-        """Constructs a new jumper guy."""
-        # A list of remaining attempts for the player to input letters
-        # represented by the parachute parts.
-        self._parachute = ["  ___  ", " /___\ ", " \   / ", "  \ /  ", "   |   "]
-    def get_parachute (self, input_letter):
-        """This method will print the Jumper and the parachute.
+        self.game_parachute = Parachute()
+        self.game_word = word()
+        self.game_word.new_word()
+        print(self.game_word.printWord())
+        while(not self.game_parachute.is_guy_dead() and not self.check_win()):
+            self.player_turn()
         
-        Attributes:
-            input_letter (True/False): defines if the letter input by the
-            player is correct or wrong. 
-        """
+    def player_turn(self):
+        correct = self.player_guess()
+        self.game_parachute.get_parachute(correct)
+        print(self.game_word.printWord())
+
+            
+
+    def check_win(self):
+        return self.game_word.complete()
         
-        # If the letter input by the player is in the word, the parachute
-        # will display as it was.
-        if input_letter == True:
-            for i in self._parachute:
-                print (i)
-        # If the letter input by the player is not in the word, a part of
-        # the parachute will be erased. 
-        else:
-            self._parachute.pop(0)
-            for i in self._parachute:
-                print (i)
-        # If the jumper still has parachute, the head will be "O"
-        # but once the parachute is over, the head turns to "X"
-        head = lambda parachute_length: "   X   " if (parachute_length == 0) else "   O   "
-        print (head (len(self._parachute)))
-        print ("  /|\  ")
-        print ("  / \  ")   
-
-    def  is_guy_dead(self):
-        """A method to define if the parachute guy is dead."""
-        if len(self._parachute) == 0:
-            is_guy_dead = True
-
-        return is_guy_dead
+    
+    def player_guess(self):
+        return self.game_word.calc_guess(input("What is your guess? ").lower())
 
 
-#, "earthworm", "company", "mushroom", "battery", "observation", "question", "departure", "offensive"
 
 class word:
     """Generates random word, turns it into "_", calcs if user guess is right or wrong
@@ -82,50 +72,50 @@ class word:
             currentword  += lett.toString()
         return currentword
 
-    def word_test():
-        test = word()
-        test._word_bank = ["harmony"]
-        test.new_word()
-        count = 0
-        print("TEST")
-        print(test.printWord())
-        test.calc_guess("h")
-        print(test.printWord())
-        if test.complete():
-            print("Easy")
-            count += 1
-        test.calc_guess("a")
-        print(test.printWord())
-        if test.complete():
-            print("Easy")
-            count += 1
-        test.calc_guess("r")
-        print(test.printWord())
-        if test.complete():
-            print("Easy")
-            count += 1
-        test.calc_guess("m")
-        print(test.printWord())
-        if test.complete():
-            print("Easy")
-            count += 1
-        test.calc_guess("o")
-        print(test.printWord())
-        if test.complete():
-            print("Easy")
-            count += 1
-        test.calc_guess("n")
-        print(test.printWord())
-        if test.complete():
-            print("Easy")
-            count += 1
-        test.calc_guess("y")
-        print(test.printWord())
-        if test.complete():
-            print("Easy")
-            count += 1
-        if count == 1:
-            print("internal test passed")
+    # def word_test():
+    #     test = word()
+    #     test._word_bank = ["harmony"]
+    #     test.new_word()
+    #     count = 0
+    #     print("TEST")
+    #     print(test.printWord())
+    #     test.calc_guess("h")
+    #     print(test.printWord())
+    #     if test.complete():
+    #         print("Easy")
+    #         count += 1
+    #     test.calc_guess("a")
+    #     print(test.printWord())
+    #     if test.complete():
+    #         print("Easy")
+    #         count += 1
+    #     test.calc_guess("r")
+    #     print(test.printWord())
+    #     if test.complete():
+    #         print("Easy")
+    #         count += 1
+    #     test.calc_guess("m")
+    #     print(test.printWord())
+    #     if test.complete():
+    #         print("Easy")
+    #         count += 1
+    #     test.calc_guess("o")
+    #     print(test.printWord())
+    #     if test.complete():
+    #         print("Easy")
+    #         count += 1
+    #     test.calc_guess("n")
+    #     print(test.printWord())
+    #     if test.complete():
+    #         print("Easy")
+    #         count += 1
+    #     test.calc_guess("y")
+    #     print(test.printWord())
+    #     if test.complete():
+    #         print("Easy")
+    #         count += 1
+    #     if count == 1:
+    #         print("internal test passed")
 
 
 class letter:
@@ -150,8 +140,6 @@ class letter:
         else:
             ret = "_ "
         return ret
-        
-
 
 if __name__ == "__main__":
-    print("put main here")
+    main()  
