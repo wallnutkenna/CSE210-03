@@ -79,3 +79,4 @@ class Director:
         """A method to define if the word has been completed."""
         complete_word = self._word._complete
         return complete_word
+        
