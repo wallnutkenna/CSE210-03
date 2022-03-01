@@ -1,6 +1,5 @@
-from .ParachuteGuy import Parachute
-from .word import word
-from .word import letter
+from ParachuteGuy import Parachute
+from word import word
 
 class Director:
     """A person who directs the game. 

@@ -39,7 +39,7 @@ class Parachute:
         print ("  /|\  ")
         print ("  / \  ")   
 
-    def  is_guy_dead(self):
+    def  _is_guy_dead(self):
         """A method to define if the parachute guy is dead."""
         
         if len(self._parachute) == 0:
